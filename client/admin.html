@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Administration · Campus Portal</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body data-page="admin">
+  <header id="site-header"></header>
+  <main>
+<div class="page container">
+
+<h1>Administrator dashboard</h1>
+<p class="page__subtitle">Every action on this page is also enforced on the server: the API rejects any request that is not from an active administrator account.</p>
+<div class="grid grid--stats" id="admin-stats"></div>
+<div id="upcoming-events"></div>
+<div class="tabs" role="tablist" id="admin-tabs">
+  <button class="tab" role="tab" data-target="events">Events</button><button class="tab" role="tab" data-target="users">Users</button>
+  <button class="tab" role="tab" data-target="alumni">Alumni approvals</button><button class="tab" role="tab" data-target="reports">Reports</button><button class="tab" role="tab" data-target="news">News</button><button class="tab" role="tab" data-target="checkin">Check-in</button><button class="tab" role="tab" data-target="analytics">Analytics</button>
+</div>
+<section id="tab-events">
+  <div class="card"><h2 id="event-form-title">Create a new event</h2><div id="event-msg" class="alert" role="alert"></div>
+  <form id="event-form" class="form-grid" novalidate>
+    <div><label for="title">Title</label><input class="input" id="title" name="title" required></div>
+    <div><label for="category">Category</label><input class="input" id="category" name="category" placeholder="sports, workshop, career, cultural…" required></div>
+    <div><label for="venue">Venue</label><input class="input" id="venue" name="venue" required></div>
+    <div><label for="startsAt">Starts at</label><input class="input" type="datetime-local" id="startsAt" name="startsAt" required></div>
+    <div><label for="capacity">Capacity</label><input class="input" type="number" min="1" id="capacity" name="capacity" required></div>
+    <div style="grid-column:1/-1"><label for="description">Description</label><textarea id="description" name="description" required></textarea></div>
+    <div class="cell-actions"><button class="btn btn--primary" type="submit">Save event</button><button class="btn btn--ghost" type="button" id="event-cancel" hidden>Cancel editing</button></div>
+  </form></div>
+  <div class="card" style="margin-top:1rem"><div class="row"><h2>Manage events</h2><span class="muted">Edit capacity, notify attendees or remove an event.</span></div>
+  <div class="table-wrap"><table><thead><tr><th>Title</th><th>Date</th><th>Category</th><th>Capacity</th><th>Confirmed</th><th>Seats</th><th>Actions</th></tr></thead><tbody id="events-table"></tbody></table></div></div>
+</section>
+<section id="tab-users" hidden><div class="card"><h2>User management</h2>
+  <form class="filters" id="user-filters"><div><label for="uq">Search</label><input class="input" id="uq" name="q" placeholder="Name, email or college ID"></div>
+  <div><label for="ur">Role</label><select class="select" id="ur" name="role"><option value="">All roles</option><option>student</option><option>alumni</option><option>admin</option></select></div>
+  <div><label for="us">Status</label><select class="select" id="us" name="status"><option value="">Any status</option><option value="active">Active</option><option value="suspended">Suspended</option></select></div>
+  <div class="btn-row"><button class="btn btn--primary" type="submit">Apply</button><button class="btn btn--ghost" type="button" id="user-clear">Clear</button></div></form>
+  <div class="table-wrap"><table><thead><tr><th>Name</th><th>Email</th><th>Role</th><th>Verified</th><th>Status</th><th>Actions</th></tr></thead><tbody id="users-table"></tbody></table></div></div></section>
+<section id="tab-alumni" hidden><div class="card"><div class="row"><h2>Alumni approval queue</h2><span class="muted">Approved profiles appear in the public directory and gain posting rights.</span></div><div id="alumni-queue"></div></div></section>
+<section id="tab-reports" hidden><div class="card"><div class="row"><h2>Registration report</h2><button class="btn btn--ok btn--sm" id="export-csv" type="button">Export CSV</button></div>
+  <form class="filters" id="report-filters"><div><label for="event-filter">Event</label><select class="select" id="event-filter" name="eventId"><option value="">All events</option></select></div>
+  <div><label for="rs">Status</label><select class="select" id="rs" name="status"><option value="">All statuses</option><option value="confirmed">Confirmed</option><option value="waitlisted">Waitlisted</option><option value="cancelled">Cancelled</option></select></div>
+  <div class="btn-row"><button class="btn btn--primary" type="submit">Apply</button><button class="btn btn--ghost" type="button" id="report-clear">Clear</button></div></form>
+  <div class="table-wrap"><table><thead><tr><th>Student</th><th>Email</th><th>Event</th><th>Status</th><th>Registered</th></tr></thead><tbody id="report-table"></tbody></table></div></div></section>
+<section id="tab-news" hidden><div class="card"><h2>Publish an announcement</h2><div id="news-msg" class="alert" role="alert"></div>
+  <form id="news-form" novalidate><label for="nt">Title</label><input class="input" id="nt" name="title" required><label for="nb">Message</label><textarea id="nb" name="body" required></textarea>
+  <button class="btn btn--primary" type="submit" style="margin-top:.8rem">Publish</button></form></div><div id="news-admin"></div></section>
+<section id="tab-checkin" hidden><div class="card"><div class="row"><h2>Event check-in</h2><span class="muted" id="attendance-count"></span></div>
+  <div class="filters"><div><label for="checkin-event">Event</label><select class="select" id="checkin-event"></select></div><div><label for="checkin-code">Ticket code</label><input class="input" id="checkin-code" placeholder="Scan QR or paste ticket code"></div>
+  <div class="btn-row"><button class="btn btn--primary" id="checkin-submit" type="button">Check in</button><button class="btn btn--outline" id="scan-toggle" type="button">Start camera</button></div></div>
+  <video id="scan-video" playsinline muted hidden style="width:100%;max-width:360px;border-radius:12px;margin-top:1rem"></video><div id="checkin-result" class="alert" role="status"></div>
+  <div class="table-wrap"><table><thead><tr><th>Student</th><th>College ID</th><th>Status</th><th>Checked in</th></tr></thead><tbody id="attendance-table"></tbody></table></div></div></section>
+<section id="tab-analytics" hidden><div class="card"><div class="row"><h2>Event analytics</h2><button class="btn btn--outline btn--sm" id="analytics-refresh" type="button">Refresh analytics</button></div><div class="grid grid--stats" id="analytics-kpis"></div><div class="grid grid--detail" style="margin-top:1rem"><div class="card"><h3>Registrations by month</h3><canvas id="monthly-chart" height="180"></canvas></div><div class="card"><h3>Top events by registrations</h3><canvas id="event-chart" height="180"></canvas></div></div><p class="muted">Reminder emails run automatically every 15 minutes for confirmed registrations roughly 24 hours before an event. SMTP must be configured to send real emails.</p><button class="btn btn--outline" id="run-reminders" type="button">Run reminder check now</button></div></section>
+</div>
+  </main>
+  <footer id="site-footer" class="site-footer" data-note="Administration" data-link="/index.html" data-link-text="Back to site"></footer>
+  <script src="/js/vendor/jsQR.js"></script>
+  <script src="/js/vendor/chart.umd.js"></script>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>

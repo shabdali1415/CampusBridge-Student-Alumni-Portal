@@ -1,0 +1,19 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "CampusBridge Student Event & Alumni Portal API",
+    "version": "1.1.0",
+    "description": "API reference for the existing Express/MySQL campus portal. Authenticated routes use the access-token mechanism implemented by the application; the refresh token is stored in an HTTP-only cookie."
+  },
+  "servers": [{"url": "http://localhost:5000/api", "description": "Local development"}],
+  "tags": [{"name":"Health"},{"name":"Events"},{"name":"Authentication"},{"name":"Admin"}],
+  "paths": {
+    "/health": {"get":{"tags":["Health"],"summary":"Check application and database health","responses":{"200":{"description":"Application and database are reachable"},"500":{"description":"Database or server error"}}}},
+    "/events": {"get":{"tags":["Events"],"summary":"List events with optional filters and pagination","parameters":[{"name":"page","in":"query","schema":{"type":"integer","minimum":1}},{"name":"pageSize","in":"query","schema":{"type":"integer","minimum":1,"maximum":50}},{"name":"category","in":"query","schema":{"type":"string"}},{"name":"q","in":"query","schema":{"type":"string"}}],"responses":{"200":{"description":"Paginated event list"}}}},
+    "/events/{id}": {"get":{"tags":["Events"],"summary":"Get event details","parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer","minimum":1}}],"responses":{"200":{"description":"Event details"},"404":{"description":"Event not found"}}}},
+    "/events/{id}/register": {"post":{"tags":["Events"],"summary":"Register the current student for an event","description":"Requires an authenticated student. Capacity is serialized by locking the event row; if full, the student is placed on the waitlist.","security":[{"bearerAuth":[]}],"parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer","minimum":1}}],"responses":{"201":{"description":"Confirmed or waitlisted"},"401":{"description":"Not authenticated"},"409":{"description":"Already registered"}}},"delete":{"tags":["Events"],"summary":"Cancel current student's registration","security":[{"bearerAuth":[]}],"parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer","minimum":1}}],"responses":{"200":{"description":"Registration cancelled; waitlist may be promoted"}}}},
+    "/events/{id}/ticket": {"get":{"tags":["Events"],"summary":"Get a QR ticket for a confirmed registration","security":[{"bearerAuth":[]}],"parameters":[{"name":"id","in":"path","required":true,"schema":{"type":"integer","minimum":1}}],"responses":{"200":{"description":"Ticket QR and check-in code"},"404":{"description":"No confirmed ticket"}}}},
+    "/auth/login": {"post":{"tags":["Authentication"],"summary":"Sign in","requestBody":{"required":true,"content":{"application/json":{"schema":{"type":"object","required":["email","password"],"properties":{"email":{"type":"string","format":"email"},"password":{"type":"string","minLength":1}}}}}},"responses":{"200":{"description":"Signed in"},"401":{"description":"Invalid credentials"}}}}
+  },
+  "components": {"securitySchemes":{"bearerAuth":{"type":"http","scheme":"bearer","bearerFormat":"JWT","description":"Use the access token returned by the login endpoint. Confirm exact token format against the deployed API client."}}}
+}

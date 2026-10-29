@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My profile · Campus Portal</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body data-page="profile">
+  <header id="site-header"></header>
+  <main>
+<div class="page container">
+
+<h1>My profile</h1><p class="page__subtitle">Update your details. Alumni fields only apply to alumni accounts.</p>
+<div class="grid" style="grid-template-columns:1fr 1fr;align-items:start">
+<section class="card"><h2>Account details</h2><div id="form-msg" role="alert" class="alert"></div>
+<form class="form" id="profile-form" novalidate>
+  <label for="name">Full name</label><input class="input" type="text" id="name" name="name" required>
+  <label for="email">Email address</label><input class="input" type="email" id="email" name="email" disabled><p class="help">The email address cannot be changed here.</p>
+  <label for="collegeId">College ID</label><input class="input" type="text" id="collegeId" name="collegeId">
+  <div id="alumni-profile-fields" hidden>
+    <label for="graduationYear">Graduation year</label><input class="input" type="number" id="graduationYear" name="graduationYear">
+    <label for="degree">Degree</label><input class="input" type="text" id="degree" name="degree">
+    <label for="company">Company</label><input class="input" type="text" id="company" name="company">
+    <label for="jobTitle">Job title</label><input class="input" type="text" id="jobTitle" name="jobTitle">
+    <label for="bio">Short bio</label><textarea id="bio" name="bio" maxlength="500"></textarea><p class="help" id="approval-note"></p>
+  </div>
+  <button class="btn btn--primary btn--block" type="submit" style="margin-top:1.1rem">Save changes</button>
+</form></section>
+<section class="card"><h2>Profile picture</h2><div id="avatar-slot"></div>
+<p class="muted" style="text-align:center">JPEG, PNG, GIF or WebP. Maximum 2 MB. The file type is checked against the image's actual contents, not just its name.</p>
+<form id="avatar-form"><label for="avatar">Choose an image</label><input class="input" type="file" id="avatar" accept="image/png,image/jpeg,image/gif,image/webp">
+<button class="btn btn--primary btn--block" type="submit" style="margin-top:.8rem">Upload picture</button></form>
+<div class="quote" id="verify-note" hidden><b>Email verification</b> Your email address has not been confirmed yet. Some features stay locked until you click the link we emailed you. <button class="btn btn--outline btn--sm" id="resend" type="button">Resend link</button></div>
+</section></div>
+</div>
+  </main>
+  <footer id="site-footer" class="site-footer" data-note="Profile"></footer>
+    <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>

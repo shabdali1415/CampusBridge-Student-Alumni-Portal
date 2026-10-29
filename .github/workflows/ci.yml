@@ -1,0 +1,40 @@
+name: CI
+on:
+  push:
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: student_portal_test
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="mysqladmin ping -h 127.0.0.1 -proot"
+          --health-interval=10s --health-timeout=5s --health-retries=10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - run: npm install
+      - name: Prepare isolated test schema
+        env:
+          MYSQL_PWD: root
+        run: sed 's/student_portal/student_portal_test/g' db/schema.sql | mysql -h 127.0.0.1 -uroot student_portal_test
+      - name: Run unit and concurrency tests
+        env:
+          NODE_ENV: test
+          DB_HOST: 127.0.0.1
+          DB_PORT: 3306
+          DB_NAME: student_portal_test
+          DB_USER: root
+          DB_PASSWORD: root
+          DB_CONNECTION_LIMIT: 20
+          JWT_ACCESS_SECRET: ci-access-secret-which-is-long-enough
+          JWT_REFRESH_SECRET: ci-refresh-secret-which-is-long-enough
+          RUN_DB_INTEGRATION: '1'
+        run: npm test

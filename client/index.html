@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Campus Portal · Student Events &amp; Alumni Network</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body data-page="home">
+  <header id="site-header"></header>
+  <main>
+
+<section class="hero"><div class="container hero__grid">
+  <div>
+    <span class="hero__tag">Student events &amp; alumni network</span>
+    <h1>Everything campus, in one portal.</h1>
+    <p>Discover and register for college events, track your seats and waitlists, follow campus announcements, and stay connected with alumni who have been where you are going.</p>
+    <div class="hero__actions"><a id="cta-primary" class="btn btn--pink btn--lg" href="/register.html">Create your account</a><a class="btn btn--outline btn--lg" href="/events.html">Browse events</a></div>
+  </div>
+  <aside class="live" aria-label="Live portal numbers"><div class="live__label">LIVE ON THE PORTAL</div>
+    <div class="live__grid" id="live"><div class="live__cell"><b>–</b><span>Upcoming events</span></div><div class="live__cell"><b>–</b><span>Alumni network</span></div><div class="live__cell"><b>–</b><span>Open roles</span></div><div class="live__cell"><b>–</b><span>Campus news</span></div></div>
+  </aside>
+</div></section>
+<div class="container section">
+  <h2>What you can do here</h2><p class="muted">Three roles, one sign-in, no juggling separate systems.</p>
+  <div class="grid grid--cards">
+    <div class="card feature"><div class="ico">🎟</div><h3>Register for events</h3><p>Search by category and date, see live seat counts and a countdown, and get an automatic, verified position when an event fills up.</p></div>
+    <div class="card feature"><div class="ico">⏳</div><h3>Fair waitlists</h3><p>Cancel a confirmed place and the next eligible student is promoted automatically and notified by email.</p></div>
+    <div class="card feature"><div class="ico">🎓</div><h3>Alumni directory</h3><p>Search graduates by year, degree and company. Only verified and administrator-approved profiles appear.</p></div>
+    <div class="card feature"><div class="ico">💼</div><h3>Jobs &amp; opportunities</h3><p>Alumni share openings from their workplaces; students and peers browse and apply through verified links.</p></div>
+    <div class="card feature"><div class="ico">🤝</div><h3>Build your network</h3><p>Send connection requests to alumni, accepted and rejected, so your network is in one view.</p></div>
+    <div class="card feature"><div class="ico">📰</div><h3>Campus news</h3><p>Announcements with pagination and discussion, so important updates never get buried in a chat group.</p></div>
+  </div>
+  <h2 style="margin-top:2.5rem">Choose your path</h2><p class="muted">Your role decides where you land after signing in.</p>
+  <div class="grid grid--cards" style="margin-bottom:2rem">
+    <div class="card path"><h3>Student</h3><p class="muted">Browse events, register, and manage your seats.</p><a class="btn btn--primary btn--sm" href="/register.html">Join as student</a></div>
+    <div class="card path"><h3>Alumni</h3><p class="muted">Build a profile, post jobs and connect with students.</p><a class="btn btn--primary btn--sm" href="/register.html">Join as alumni</a></div>
+    <div class="card path"><h3>Administrator</h3><p class="muted">Manage events, users, approvals and reports.</p><a class="btn btn--outline btn--sm" href="/login.html">Admin sign in</a></div>
+  </div>
+</div>
+  </main>
+  <footer id="site-footer" class="site-footer" ></footer>
+    <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>

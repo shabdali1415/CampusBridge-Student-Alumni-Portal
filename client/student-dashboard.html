@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student dashboard · Campus Portal</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body data-page="student-dashboard">
+  <header id="site-header"></header>
+  <main>
+<div class="page container">
+
+<h1 id="welcome">Welcome back</h1><p class="page__subtitle">Your registrations, upcoming events and campus updates in one place.</p>
+<div class="grid grid--stats" id="stats"></div>
+<div class="tabs" style="margin-top:1.4rem"><a class="tab" aria-selected="true" href="/events.html">Browse events</a><a class="tab" href="/my-registrations.html">My registrations</a><a class="tab" href="/news.html">Campus news</a><a class="tab" href="/alumni-directory.html">Alumni directory</a></div>
+<div class="grid" style="grid-template-columns:1.2fr 1fr;align-items:start">
+  <section class="card"><div class="row"><h2>Your next events</h2><a href="/my-registrations.html" class="muted">View all</a></div><div id="next-events"></div></section>
+  <section class="card"><div class="row"><h2>Newest announcements</h2><a href="/news.html" class="muted">All news</a></div><div id="news-list" class="list"></div></section>
+</div>
+</div>
+  </main>
+  <footer id="site-footer" class="site-footer" data-note="Student dashboard"></footer>
+    <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>

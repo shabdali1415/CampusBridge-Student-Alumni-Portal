@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Create account · Campus Portal</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body data-page="register">
+  <header id="site-header"></header>
+  <main>
+
+<div class="auth"><div class="auth__card auth__card--wide">
+  <span class="brand" style="color:var(--ink)"><span class="brand__logo">▣</span> Campus Portal</span>
+  <h1 class="auth__title">Create your account</h1>
+  <p class="auth__subtitle">Register as a student or as an alumnus. Administrator accounts are created by the college only.</p>
+  <div id="form-msg" role="alert" class="alert"></div>
+  <form class="form" id="register-form" novalidate>
+    <fieldset>
+      <legend>I am registering as</legend>
+      <div class="role-picker">
+        <label class="role-option"><input type="radio" name="role" value="student" checked><span><b>Student</b><small>Join events and campus news</small></span></label>
+        <label class="role-option"><input type="radio" name="role" value="alumni"><span><b>Alumni</b><small>Build a profile, post jobs, connect</small></span></label>
+      </div>
+      <p class="help">The administrator role is intentionally not available on this form.</p>
+    </fieldset>
+    <div class="form-grid">
+      <div><label for="name">Full name *</label><input class="input" id="name" name="name" placeholder="e.g. Priya Sharma" autocomplete="name" required></div>
+      <div><label for="collegeId">College ID / Roll number *</label><input class="input" id="collegeId" name="collegeId" placeholder="e.g. CS2024-017"></div>
+      <div><label for="email">Email address *</label><input class="input" type="email" id="email" name="email" placeholder="you@college.edu" autocomplete="email" required><p class="help">We send a verification link here. It must work.</p></div>
+      <div><label for="graduationYear">Graduation year</label><input class="input" type="number" id="graduationYear" name="graduationYear" placeholder="e.g. 2019"></div>
+      <div><label for="password">Password *</label><input class="input" type="password" id="password" name="password" placeholder="Create a password" autocomplete="new-password" required></div>
+      <div><label for="confirmPassword">Confirm password *</label><input class="input" type="password" id="confirmPassword" name="confirmPassword" placeholder="Type it again" autocomplete="new-password" required></div>
+    </div>
+    <div class="meter" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <ul class="rules"><li>At least 8 characters</li><li>One uppercase letter</li><li>A lowercase letter or symbol</li><li>At least one number</li></ul>
+    <button class="btn btn--primary btn--block btn--lg" type="submit" style="margin-top:1rem">Create my account</button>
+  </form>
+  <p class="auth__foot" style="margin-top:1rem">Already have an account? <a href="/login.html">Sign in</a></p>
+</div></div>
+  </main>
+  <footer id="site-footer" class="site-footer" ></footer>
+    <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>

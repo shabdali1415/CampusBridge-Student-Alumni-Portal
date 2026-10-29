@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sign in · Campus Portal</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body data-page="login">
+  <header id="site-header"></header>
+  <main>
+
+<div class="auth"><div class="auth__card">
+  <span class="brand" style="color:var(--ink)"><span class="brand__logo">▣</span> Campus Portal</span>
+  <h1 class="auth__title">Welcome back</h1>
+  <p class="auth__subtitle">Sign in with your college account to continue.</p>
+  <div id="login-error" role="alert" class="alert"></div>
+  <form class="form" id="login-form" novalidate>
+    <label class="field__label" for="email">Email address</label>
+    <input class="input" type="email" id="email" name="email" autocomplete="email" required>
+    <label class="field__label" for="password">Password</label>
+    <input class="input" type="password" id="password" name="password" autocomplete="current-password" required>
+    <button class="btn btn--primary btn--block btn--lg" type="submit" style="margin-top:1.1rem">Sign in</button>
+  </form>
+  <div class="auth__links"><a href="/forgot-password.html">Forgot password?</a><a href="/register.html">Create an account</a></div>
+  <p class="auth__foot">After signing in you are taken straight to your own dashboard: students to <b>Events</b>, alumni to <b>Alumni</b>, administrators to <b>Admin</b>.</p>
+</div></div>
+  </main>
+  <footer id="site-footer" class="site-footer" ></footer>
+    <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>

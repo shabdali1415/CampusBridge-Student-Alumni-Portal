@@ -1,0 +1,11 @@
+flowchart LR
+  Browser[Existing HTML/CSS/JS UI] -->|HTTP / JSON| Express[Express API]
+  React[Optional React + TypeScript starter] -. future API integration .-> Express
+  Express --> Auth[Auth / validation / role middleware]
+  Auth --> Services[Event service / admin / alumni / jobs]
+  Services --> MySQL[(MySQL 8)]
+  Express <--> Socket[Socket.IO realtime updates]
+  Express --> Mail[Nodemailer]
+  Scheduler[node-cron reminder scheduler] --> MySQL
+  Scheduler --> Mail
+  CI[GitHub Actions] --> Tests[Jest + MySQL integration test]

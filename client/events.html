@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Events · Campus Portal</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body data-page="events">
+  <header id="site-header"></header>
+  <main>
+<div class="page container">
+
+<h1>College events</h1><p class="page__subtitle">Search, filter and register. Nine events per page.</p>
+<form class="filters" id="events-filters" role="search">
+  <div><label for="q">Search</label><input class="input" type="search" id="q" name="q" placeholder="Title, description or venue"></div>
+  <div><label for="category">Category</label><select class="select" id="category" name="category"><option value="">All categories</option></select></div>
+  <div><label for="from">From date</label><input class="input" type="date" id="from" name="from"></div>
+  <div><label for="to">To date</label><input class="input" type="date" id="to" name="to"></div>
+  <div class="btn-row"><button class="btn btn--primary" type="submit">Apply</button><button class="btn btn--ghost" type="button" id="filters-clear">Clear</button></div>
+</form>
+<div class="grid grid--cards" id="events-grid" aria-live="polite"></div><div class="pager" id="pager"></div>
+</div>
+  </main>
+  <footer id="site-footer" class="site-footer" data-note="Events"></footer>
+    <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>

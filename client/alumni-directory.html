@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Alumni directory · Campus Portal</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body data-page="alumni">
+  <header id="site-header"></header>
+  <main>
+<div class="page container">
+
+<h1>Alumni directory</h1><p class="page__subtitle">Only profiles that are email-verified and approved by an administrator appear here.</p>
+<form class="filters" id="alumni-filters" role="search">
+  <div><label for="q">Search</label><input class="input" type="search" id="q" name="q" placeholder="Name, company, degree"></div>
+  <div><label for="graduationYear">Graduation year</label><select class="select" id="graduationYear" name="graduationYear"><option value="">Any year</option></select></div>
+  <div><label for="degree">Degree</label><select class="select" id="degree" name="degree"><option value="">Any degree</option></select></div>
+  <div><label for="company">Company</label><select class="select" id="company" name="company"><option value="">Any company</option></select></div>
+  <div class="btn-row"><button class="btn btn--primary" type="submit">Apply</button><button class="btn btn--ghost" type="button" id="filters-clear">Clear</button></div>
+</form>
+<div class="grid grid--cards" id="alumni-grid"></div>
+</div>
+  </main>
+  <footer id="site-footer" class="site-footer" data-note="Alumni directory"></footer>
+    <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>
